@@ -21,9 +21,10 @@ const PostUser = async ({ userId }) => {
   // FETCH DATA WITHOUT AN API
   const user = await getUser(userId);
 
+
   return (
     <div className={styles.container}>
-      <Image
+     <Image
         className={styles.avatar}
         src={user?.img ? user?.img : "/noavatar.png"}
         alt=""
@@ -32,7 +33,7 @@ const PostUser = async ({ userId }) => {
       />
       <div className={styles.texts}>
         <span className={styles.title}>Author</span>
-        <span className={styles.username}>{user?.username}</span>
+        <span className={styles.username}>{user?.name}</span>
       </div>
     </div>
   );

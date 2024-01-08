@@ -15,41 +15,53 @@ import { getPost } from '@/lib/data';
 
 // if(!response.ok){
 //    throw new Error("Something went wrong");
- 
+
 //   }
 //  return response.json()
 // }
-const SinglePost = async ({params}) => {
-  console.log(params)
+
+export const generateMetadata = async ({ params }) => {
+  const { slug } = params;
+  const post = await getPost(slug)
+  return {
+    title: post.title,
+    description: post.desc
+  }
+}
+const SinglePost = async ({ params }) => {
   const { slug } = params;
   //GET POST WITH AN API
- //const post = await getData(slug);
- //GET POST WITHOUT AN API
- const post =await getPost(slug)
+  //const post = await getData(slug);
+  //GET POST WITHOUT AN API
+  const post = await getPost(slug)
+  
   return (
 
     <div className={styles.container}>
       <div className={styles.imgContainer}>
-        <Image className={styles.img} src='/about.png' fill alt='test' />
+        <Image className={styles.img} src={post?.img} fill alt='test' />
       </div>
+
       <div className={styles.textContainer}>
         <h1 className={styles.title}>{post?.title}</h1>
         <div className={styles.details}>
-          <Image className={styles.avatar} src='/about.png' width={50} height={50} alt='test' />
-         {
-          post && (
-            <Suspense fallback={<div>Loading...</div>}>
-         <PostUser userId={post?.userId}/>
-         </Suspense>
-          )
-         }
+
+          {
+            post && (
+              <Suspense fallback={<div>Loading...</div>}>
+                <PostUser userId={post?.userId} />
+              </Suspense>
+            )
+          }
           <div className={styles.detailsText}>
             <span className={styles.detailsTitle}>Published</span>
-            <span className={styles.detailsValue}>01.01.2024</span>
+            {
+              post?.createdAt && <span className={styles.detailsValue}>{post?.createdAt.toString().slice(4, 16)}</span>
+            }
           </div>
         </div>
         <div className={styles.content}>
-         {post?.body}
+          {post?.desc}
         </div>
       </div>
     </div>
