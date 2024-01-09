@@ -9,20 +9,25 @@ import { getPosts } from '@/lib/data';
 //by default, its {cache:"force-cache"}
 //for a project that the database is constantly receiving data, use {cache:"no-store"}
 //we can also use revalidate, to refresh data after a certain duration of time
-// const getData = async () => {
-//   const response = await fetch("https://jsonplaceholder.typicode.com/posts",{next:{revalidate:3600}})
-//   if(!response.ok){
-//     throw new Error("Something went wrong")
-//   }
-//  return response.json()
-// }
+const getData = async () => {
+  const response = await fetch("http://localhost:3000/api/blog",{
+   method:"GET",
+  next:{revalidate:3600}
+  })
+  if(!response.ok){
+    throw new Error("Something went wrong")
+  }
+ return response.json()
+}
 
 const Blog = async () => {
   //FETCHING POSTS WITH AN API
-  //const posts = await getData()
+  const posts = await getData()
+  console.log(posts)
 
   //FETCHING POSTS WITHOUT AN API
- const posts = await getPosts()
+//  const posts = await getPosts()
+//  console.log(posts)
   
   return (
     <div className={styles.container}>
