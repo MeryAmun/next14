@@ -7,7 +7,7 @@ export const connectToDb = async () => {
             return;
         }
         
-        // const db = await mongoose.connect('mongodb+srv://mamba:mamba2021@transport.jlugw.mongodb.net/next14?retryWrites=true');
+       
          const db = await mongoose.connect(process.env.MONGO_URL);
         connection.isConnected = db.connections[0].readyState;
         console.log(connection)
