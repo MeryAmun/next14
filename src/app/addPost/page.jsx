@@ -13,11 +13,12 @@ const AddPost = () => {
   }
   return (
     <div className={styles.container}>
-    <form onSubmit={createPost} className={styles.form}>
+    <form action={addPost} className={styles.form}>
       <input type="text" placeholder="title" name="title"/>
       <textarea placeholder="desc" name="desc" cols="30" rows="10"></textarea>
       <input type="text" placeholder="slug" name="slug"/>
       <input type="text" placeholder="userId" name="userId"/>
+      <input type="file" placeholder="userId" name="img"/>
       <button>Create</button>
     </form>
 

@@ -2,20 +2,19 @@ import React from 'react'
 import LoginForm from "@/components/loginForm/loginForm";
 //import { handleGithubLogin } from "@/lib/action";
 import styles from "./login.module.css";
-import { signIn } from '@/lib/auth';
+import { handleGithubLogin } from '@/lib/actions';
 
-const Login = () => {
-  const handleGithubLogin = async () => {
-    "use server"
-    await signIn("github")
-  }
+const Login = async () => {
+   
+  
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <form>
-          <button onClick={handleGithubLogin} className={styles.github}>Login with Github</button>
+      <LoginForm />
+        <form action={handleGithubLogin}>
+          <button className={styles.github}>Login with Github</button>
         </form>
-        <LoginForm />
+       
       </div>
     </div>
   )

@@ -4,9 +4,10 @@ import { useFormState } from 'react-dom'
 import { useRouter } from "next/navigation";
 import styles from './registerForm.module.css'
 import Link from 'next/link'
-const register = null
+import { registerUser } from '@/lib/actions';
+
 const RegisterForm = () => {
-    const [state, formAction] = useFormState(register, undefined);
+   const [state, formAction] = useFormState(registerUser, undefined);
     const router = useRouter();
     useEffect(() => {
       state?.success && router.push('/login')
@@ -15,11 +16,12 @@ const RegisterForm = () => {
   return (
     <form className={styles.form} action={formAction}>
       <input type="text" placeholder="username" name="username" />
+      <input type="file" placeholder="username" name="img" />
       <input type="email" placeholder="email" name="email" />
       <input type="password" placeholder="password" name="password" />
       <input
         type="password"
-        placeholder="password again"
+        placeholder="confirm password"
         name="passwordRepeat"
       />
       <button>Register</button>
