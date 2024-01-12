@@ -19,13 +19,14 @@ export const addPost = async (prevState, formData) => {
     });
     await newPost.save();
     revalidatePath("/blog");
+    revalidatePath("/admin")
   } catch (error) {
     console.log(error);
     return { error: "Something went wrong" };
   }
 };
 
-export const deletePost = async (formData) => {
+export const deletePost = async (prevState,formData) => {
   const { id } = Object.fromEntries(formData);
 
   try {
@@ -34,6 +35,39 @@ export const deletePost = async (formData) => {
     await Post.findByIdAndDelete(id);
     console.log("deleted from db");
     revalidatePath("/blog");
+    revalidatePath("/admin");
+    //revalidatePath("/admin");
+  } catch (err) {
+    console.log(err);
+    return { error: "Something went wrong!" };
+  }
+};
+
+
+export const addUser = async (prevState, formData) => {
+  const { username, email, password, img } = Object.fromEntries(formData);
+  try {
+    connectToDb();
+    const newUser = new User({
+      username, email, password, img
+    });
+    await newUser.save();
+    revalidatePath("/admin");
+  } catch (error) {
+    console.log(error);
+    return { error: "Something went wrong" };
+  }
+};
+
+export const deleteUser = async (prevState,formData) => {
+  const { id } = Object.fromEntries(formData);
+
+  try {
+    connectToDb();
+await Post.deleteMany({userId:id})
+    await User.findByIdAndDelete(id);
+    console.log("deleted from db");
+    revalidatePath("/admin");
     //revalidatePath("/admin");
   } catch (err) {
     console.log(err);
@@ -48,7 +82,7 @@ export const handleGithubLogOut = async () => {
   await signOut();
 };
 
-export const registerUser = async (formData) => {
+export const registerUser = async (prevState,formData) => {
   const { username,email, password, passwordRepeat } =
     Object.fromEntries(formData);
 
@@ -76,12 +110,16 @@ export const registerUser = async (formData) => {
     return { error: "Something went wrong" };
   }
 };
-export const loginUser = async (formData) => {
+export const loginUser = async (prevState, formData) => {
   const { username, password } = Object.fromEntries(formData);
+
   try {
-   await signIn("credentials",{username,password})
-  } catch (error) {
-    console.log(error);
-    return { error: "Something went wrong" };
+    await signIn("credentials", { username, password });
+  } catch (err) {
+    console.log(err);
+    if (err.type === "CredentialsSignin") {
+      return { error: "Invalid username or password" };
+    }
+    throw err;
   }
 };

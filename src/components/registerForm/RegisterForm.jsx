@@ -9,6 +9,7 @@ import { registerUser } from '@/lib/actions';
 const RegisterForm = () => {
    const [state, formAction] = useFormState(registerUser, undefined);
     const router = useRouter();
+    
     useEffect(() => {
       state?.success && router.push('/login')
     }, [state?.success,router])

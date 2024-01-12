@@ -23,7 +23,6 @@ const getData = async () => {
 const Blog = async () => {
   //FETCHING POSTS WITH AN API
   const posts = await getData()
-  console.log(posts)
 
   //FETCHING POSTS WITHOUT AN API
 //  const posts = await getPosts()
