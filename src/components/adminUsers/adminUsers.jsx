@@ -1,7 +1,7 @@
 import { getUsers } from "@/lib/data";
 import styles from "./adminUsers.module.css";
 import Image from "next/image";
-import { deleteUser } from "@/lib/action";
+import { deleteUser } from "@/lib/actions";
 
 const AdminUsers = async () => {
   const users = await getUsers();
