@@ -1,8 +1,10 @@
 import { Post } from "@/lib/models";
 import { connectToDb } from "@/lib/utils";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 export const GET = async (request) => {
+    console.log(request)
     try {
         connectToDb();
         const posts = await Post.find();

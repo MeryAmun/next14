@@ -1,7 +1,7 @@
 import React from 'react'
 import PostCard from "@/components/postCard/postCard";
 import styles from "./blog.module.css";
-import { getPosts } from '@/lib/data';
+//import { getPosts } from '@/lib/data';
 
 //FETCHING DATA WITH AN API
 //Since we are using Next 14, we don't need an API

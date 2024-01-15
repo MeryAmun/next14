@@ -2,19 +2,19 @@ import Image from "next/image"
 import styles from "./postCard.module.css"
 import Link from "next/link"
 
-const deletePost = async (slug) => {
-  const response = await fetch(`http://localhost:3000/api/blog/${slug}`,{
-    method:"DELETE"
-  });
+// const deletePost = async (slug) => {
+//   const response = await fetch(`http://localhost:3000/api/blog/${slug}`,{
+//     method:"DELETE"
+//   });
   
-  if(!response.ok){
-     throw new Error("Something went wrong");
+//   if(!response.ok){
+//      throw new Error("Something went wrong");
   
-    }
-   return response.json()
-  }
+//     }
+//    return response.json()
+//   }
 
-const PostCard = ({params,post}) => {
+const PostCard = ({post}) => {
   //const deleteMessage = deletePost(post.slug)
   return (
     <div className={styles.container}>

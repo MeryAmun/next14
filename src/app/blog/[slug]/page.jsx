@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import styles from './singlePost.module.css'
 import Image from 'next/image'
 import PostUser from '@/components/postUser/postUser';
-import { getPost } from '@/lib/data';
+//import { getPost } from '@/lib/data';
 
 //FETCHING DATA WITH AN API
 //Since we are using Next 14, we don't need an API
